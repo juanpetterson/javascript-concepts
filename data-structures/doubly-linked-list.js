@@ -76,6 +76,24 @@ class DoublyLinkedList {
         return this;
     }
 
+    pop() {
+        const leaderNode = this.traverseToIndex(this.length - 2);
+        const removeNode = leaderNode.next;
+        leaderNode.next = removeNode.next;
+
+        this.length--;
+        return removeNode;
+    }
+
+    shift() {
+        const removeNode = this.head;
+        this.head = removeNode.next;
+        this.head.previous = null;
+
+        this.length--;
+        return removeNode;
+    }
+
     traverseToIndex(index) {
         let count = 0;
         let currentNode = this.head;
@@ -105,20 +123,18 @@ class DoublyLinkedList {
     toString() {
         return JSON.stringify(this);
     }
-
-    // remove com posição OK
-    // insert com posição OK
-    // pop
-    // shift
 }
 
-const myLinkedList = new DoublyLinkedList(10);
+const myLinkedList = new LinkedList(10);
 myLinkedList.append(5);
 myLinkedList.append(15);
 myLinkedList.append(25);
 myLinkedList.preppend(0);
-// myLinkedList.remove(2);
+myLinkedList.remove(2);
 myLinkedList.insert(4, 14);
+const popped = myLinkedList.pop();
+const shiftted = myLinkedList.shit();
 
-console.log(myLinkedList.toString());
+// console.log(myLinkedList.toString());
 console.log(myLinkedList.toArray());
+console.log(popped);
