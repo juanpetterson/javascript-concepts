@@ -83,6 +83,30 @@ class LinkedList {
         return removeNode;
     }
 
+    // [ 1, 2, 3 ,4 ,5 ]
+
+    reverse() {
+        if(!this.head.next) return this.head;
+
+        let firstNode = this.head; // 1 - 2
+        this.tail = this.head; // 1 - 2
+        let secondNode = firstNode.next; // 2 - 3
+
+        while(secondNode) {
+            const tempNode = secondNode.next; // 3 - 4
+
+            secondNode.next = firstNode; // 1 - 2
+            firstNode = secondNode; // 2 - 3
+
+            secondNode = tempNode; // 3 - 4
+        }
+
+        this.head.next = null;
+        this.head = firstNode; // 3 - 4
+
+        return this;
+    }
+
     traverseToIndex(index) {
         let count = 0;
         let currentNode = this.head;
@@ -118,12 +142,13 @@ const myLinkedList = new LinkedList(10);
 myLinkedList.append(5);
 myLinkedList.append(15);
 myLinkedList.append(25);
-myLinkedList.preppend(0);
-myLinkedList.remove(2);
+// myLinkedList.preppend(0);
+// myLinkedList.remove(2);
 myLinkedList.insert(4, 14);
-const popped = myLinkedList.pop();
-const shiftted = myLinkedList.shit();
+myLinkedList.reverse();
+// const popped = myLinkedList.pop();
+// const shiftted = myLinkedList.shit();
 
 // console.log(myLinkedList.toString());
 console.log(myLinkedList.toArray());
-console.log(popped);
+// console.log(popped);
